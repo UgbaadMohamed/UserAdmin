@@ -1,8 +1,8 @@
 package UserAdmin;
-
 import java.util.Scanner;
 
 public class Menu {
+
     private String menuHeader;
     private String leadText;
     private String[] menuItems;
@@ -10,7 +10,6 @@ public class Menu {
         this.menuHeader = menuHeader;
         this.leadText = leadText;
         this.menuItems = menuItems;
-
     }
 
     public void printMenu() {

@@ -1,6 +1,4 @@
 package UserAdmin;
-
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -9,10 +7,10 @@ import java.util.Scanner;
 
 public class Main {
     Scanner fileScanner= null;
-    File file = new File("text.txt");
     PrintStream printStream = null;
     private ArrayList<User> users;
-
+    private final String nameOfFile = "src/FileSave";
+    // File nameOfFile = new File("src/Files/users.txt");
     Main() {
         users = new ArrayList<User>();
         readFile();
@@ -55,26 +53,32 @@ public class Main {
         System.out.println("\nUser deleted.");
     }
 
-    void readFile() {
-            try {
-                fileScanner = new Scanner(new File("User.txt"));
-                while (fileScanner.hasNextLine()) {
-                    String ffr = fileScanner.nextLine();
-                    System.out.println(ffr);
-                }
-
-                fileScanner.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
+    public ArrayList<User> readFile() {
+        users.clear();
+        try {
+            fileScanner = new Scanner(new File("src/User.txt"));
+            while (fileScanner.hasNextLine()) {
+                users.add(new User(fileScanner.nextInt(), fileScanner.next(), fileScanner.next()));
+                System.out.println(users);
             }
+            fileScanner.close();
+
+        } catch (IOException e) {
+            System.out.println("Messege" + e);
+
+        }
+        return users;
     }
 
     void saveFile() {
+        try{
+            printStream = new PrintStream(nameOfFile);
+            printStream.append(users.get(0).getName() + " " + users.get(0).getPassword());
 
-        //Implement this ...
-    }
-
+        } catch (IOException e) {
+            System.out.println("Messege: " + e);
+        }
+        }
 
     void run() {
         boolean running;
@@ -114,6 +118,7 @@ public class Main {
             }
         }
     }
+
     public static void main(String[] args) {
         new Main().run();
 
